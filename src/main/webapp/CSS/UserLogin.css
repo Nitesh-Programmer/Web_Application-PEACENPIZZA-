@@ -1,0 +1,55 @@
+@charset "ISO-8859-1";
+
+body{
+    background-image: url("./Pizza.png");
+    background-size: cover;
+}
+*{
+    margin: 0%;
+    padding: 0%;
+    line-height: 20px;
+}
+#container{
+    background-color: #f7f7f7;
+    width: 350px;
+    padding: 20px;
+    min-height: 350px;
+    position: relative;
+    top: 230px;
+    left: 400px;
+    border-radius: 50px;
+    box-shadow: 10px 5px 4px #8fc7ea, -10px -5px 4px #8fc7ea;
+
+}
+#valueset{
+    padding: 20px;
+    border-radius: 50px;
+    text-align: center;
+}
+#forget{
+    float: right;
+    text-decoration: none;
+}
+
+#valueset>legend{
+    text-align: center;
+    font-size: x-large;
+    font-weight: 600;
+}
+#details{
+line-height: 30px;
+}
+#submit{
+   padding: 2px 15px;
+   position: relative;    
+   left: 10%;
+   font-size: large;
+}
+#or::before,#or::after{
+    content: "----------------";
+    color: #4b6a7b;
+}
+#submit:hover{
+    background-color: #8fc7ea;
+    box-shadow:-4px 2px #4b6a7b ;
+}

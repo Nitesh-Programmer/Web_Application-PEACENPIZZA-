@@ -1,0 +1,156 @@
+        .cartIcon{
+           display: flex;
+           border: 2px solid black;
+           width: max-content;
+           gap: 3px;
+           padding: 10px;
+        }
+      *{
+    margin: 0%;
+    width: 100%;
+    padding: 0%;
+}
+
+#container{
+    border: 1px solid black;
+    display: flex;
+    /* background-color: #6528f3; */
+    background-color: #caa9ff;
+    position: fixed;
+    z-index: 2;
+}
+#leftside{
+    height: 80px;
+    display: flex;
+   	width: 60%;
+   	justify-content: space-between;
+   	align-items: center;
+}
+.details{
+    border: 1px ;
+    padding-right: 12px;
+    padding-left: 11px;
+   font-size: large;
+}
+
+.details>a{
+    color: white;
+    text-decoration: none;
+}
+.details>a:hover{
+	transition: 3s;
+    background-color: #486893;
+    border-radius: 5px;
+    color: white;
+    padding-left: 15px;
+    padding-right: 15px;
+    
+}
+#rightside{
+
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+
+#search{
+    height: 20px;
+    width: 180px;
+    border-radius: 12px;
+}
+#search_Icon{
+  
+  position: relative;
+  left: -80px;
+  top: 2.5px;
+
+  
+}
+#search:hover{
+    background-color: tan;
+    font-weight: 550;
+}
+#cart_Icon{
+   border: 1px solid black;
+   width: fit-content;
+   display: inline-block;
+   right: 0%;
+   padding: 20px;
+   position: fixed;
+   border-radius: 50%;
+   background-color: antiquewhite;
+   bottom: 30px;
+   right: 20px;
+   z-index: 2;
+}
+
+
+#product_container {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(300px, 1fr));
+    justify-content: space-between;
+    left: 5px;
+    position: relative;
+    margin-top: 50px;
+    max-width: 1000px; 
+}
+
+
+
+.product_image{
+    width:350px;
+    height: 150px;
+    background-position: center;
+   
+}
+.innercontainer{
+    width: 3600px;
+	min-height:150px ;
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid black;
+    padding: 20px;
+    line-height: 20px;
+ 
+}
+
+.innercontainer>h4, .innercontainer>p, .innercontainer>span
+{
+    padding:0px 20px;
+}
+.innercontainer p{
+    color: gray;
+}
+
+
+.cartIcon{
+    display: flex;
+    border: 1px solid black;
+    gap: 3px;
+    padding: 5px;
+    width: fit-content;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    justify-content: center; 
+    border-radius: 10px;
+ }
+ #read{
+    display: flex;
+    justify-content: center;
+ }
+
+ 
+ .cartbtn{
+    width: max-content;
+    height: fit-content;
+    
+ }
+
+ .price{
+    display: flex;
+    width: 15px;
+    margin-left: 10px;
+    padding: 10px;
+ }
