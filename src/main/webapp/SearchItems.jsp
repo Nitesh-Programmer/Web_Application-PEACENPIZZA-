@@ -231,6 +231,91 @@
                 transform: translateX(-200px);
             }
         }
+        
+            .innercontainer:hover{
+		  transform: scale(1.1);
+    	  animation-name: borderLight;
+    	  animation-duration: 3s;
+    	  animation-iteration-count: infinite;
+	}
+	 @keyframes  borderLight
+	{
+			0%{
+			
+			border-top:2px solid red;
+			border-right:2px solid blue;
+			border-bottom:2px solid green;
+			border-left:2px solid yellow;
+			}
+			25%{
+			
+			border-top:2px solid yellow;
+			border-right:2px solid red;
+			border-bottom:2px solid blue;
+			border-left:2px solid green;
+			}
+			50%{
+			
+			border-top:2px solid green;
+			border-right:2px solid yellow;
+			border-bottom:2px solid red;
+			border-left:2px solid blue;
+			}
+			100%{
+			
+			border-top:2px solid blue;
+			border-right:2px solid green;
+			border-bottom:2px solid yellow;
+			border-left:2px solid red;
+		   
+			}
+	
+	}
+		
+	 #contact_admin {
+            display: none;
+            max-width: fit-content;
+            min-height: fit-content;
+            border: 1px solid black;
+            padding: 40px;
+            border-radius: 20px;
+            background-color: #f5f5f5;
+            position: absolute;
+            left: 140px;
+            top:70px;
+        }
+        .contact_form {
+            
+            padding: 5px;
+            text-align: center;
+            line-height: 55px;
+            background-color: white;
+        }
+        .contact_form input,textarea{
+            border-radius: 5px;
+            padding: 5px;
+        }
+
+        .mail_icn {
+            color: purple;
+            position: relative;
+            left: -25px;
+        }
+        #contact_admin >h3{
+            color: steelblue;
+        }
+        #feedback_admin {
+            display: none;
+            max-width: fit-content;
+            min-height: fit-content;
+            border: 1px solid black;
+            padding: 40px;
+            border-radius: 20px;
+            background-color: #f5f5f5;
+            position: absolute;
+            left: 180px;
+            top:70px;
+        }
 	
 	
 	</style>
@@ -254,14 +339,53 @@
 		%>
 		
 		<!-- The below code will work for showing the navigation bar or heading   -->
-          <div id="container">
+              <div id="container" >
       
         <div id="leftside">
            <article class="details"><a href="HomePage.jsp">Home</a></article>
            <article class="details"><a href="AboutUs.jsp">About Us</a></article>
-           <article class="details"><a href="HomePage.jsp?#product_container">Menu</a></article>
-           <article class="details"><a href="#">Contact_Us</a></article>
-           <article class="details"><a href="#">FeedBack</a></article>
+           <article class="details"><a href="HomePage.jsp#product_container">Menu</a></article>
+           <article class="details" onclick="display_contactPage()">
+           
+           <a href="#">Contact_Us</a>
+           <div id="contact_admin">
+    	   	 <h3>For any Brand collaboration or Franchise contact us</h3>
+	    	  <form action="contactpage"  method="post"  class="contact_form">
+            		<div class=" ad_details">
+                		<input type="email" placeholder="Enter Your E-Mail" name="email"> <i class="fa-regular fa-envelope mail_icn"></i>
+            		</div>
+            		<div class="ad_details">
+            	    	<input type="text" name="user_name" id="" placeholder="Enter Your Name">
+        	    	</div>
+    	        	<div class="ad_details">
+		                <textarea name="user_message" placeholder="Enter Your message here..." cols="50" rows="5"></textarea>
+            		</div>
+            		<input style="width: fit-content; text-align: center;"   type="submit" value="Click To submit">
+        	</form> 
+    </div>
+
+           
+           </article>
+           <article class="details" onclick="display_feedback()" >
+           
+           <a href="#">FeedBack</a>
+             <div id="feedback_admin">
+    	   	 <h3>Give your feedback to improve our product and customer service</h3>
+	    	   <form action="feedback" method="post" class="contact_form">
+            		<div class=" ad_details">
+                		<input type="email" placeholder="Enter Your E-Mail" name="email"> <i class="fa-regular fa-envelope mail_icn"></i>
+            		</div>
+            		<div class="ad_details">
+            	    	<input type="text" name="user_name" id="" placeholder="Enter Your Name">
+        	    	</div>
+    	        	<div class="ad_details">
+		                <textarea name="user_feedback" placeholder="Enter Your message here..." cols="50" rows="5"></textarea>
+            		</div>
+            		<input style="width: fit-content; text-align: center;"   type="submit" value="Click To submit">
+        	</form>
+     </div>
+           
+           </article>
         </div>
  		 <div id="rightside">
             <input type="text" name="search_value" id="search"> <span id="search_Icon"><a  id="searchLink" href="search_product">
@@ -288,14 +412,17 @@
             </article>
             <article class="details"><a href="logout">LogOut</a></article>
         </div>
-    </div>			
+    </div>
+    
+    
+			
 	 <div id="cart">
         <span id="cart_Icon"><a href="com.addtocart.jsp"><i class="fa-solid fa-cart-shopping fa-3x"></i></a></span>
     </div>
 
 		<% if(!list.isEmpty()){%>
 						
-		<div id="product_container"  onclick="hidden_profile()">
+		<div id="product_container" onclick="handleClick()">
          
         <%for(Products product:list) {%> 
           <div id="item1" class="innercontainer">
@@ -349,27 +476,67 @@
 		
 		
 		  <script>
-        document.getElementById('searchLink').addEventListener('click', function() {
-            var searchValue = document.getElementById('search').value;
-            var searchLink = 'search_product?search_value=' + encodeURIComponent(searchValue);
-            this.setAttribute('href', searchLink);
-        });
-        
-        function display_userDetails()
-        {
-        	let profile_div=document.getElementById("profile");
-        	
-        	profile_div.style.display="block";
-        }
-        
-        function hidden_profile()
-        {
-            
-            let user_div=document.getElementById("profile");
+		  document.getElementById('searchLink').addEventListener('click', function() {
+	            var searchValue = document.getElementById('search').value;
+	            var searchLink = 'search_product?search_value=' + encodeURIComponent(searchValue);
+	            this.setAttribute('href', searchLink);
+	        }); 
+	        
+	        function display_userDetails()
+	        {
+	        	let profile_div=document.getElementById("profile");
+	        	
+	        	profile_div.style.display="block";
+	        	
+	      	   hid_contactPage();
+	      	   hid_feedback();
+	        }
+	        function hidden_profile()
+	        {
+	            
+	            let user_div=document.getElementById("profile");
 
-            user_div.style.display="none";
+	            user_div.style.display="none";
 
-        }
+	        }
+	        function display_contactPage()
+	        {
+	        	let contact=document.getElementById("contact_admin");
+	        	
+	        	contact.style.display="block";
+	        	hid_feedback();
+	        	hidden_profile();
+	        }
+	        function hid_contactPage()
+	        {
+				let contact=document.getElementById("contact_admin");
+	        	
+	        	contact.style.display="none";
+	        }
+	        function hid_feedback()
+	        {
+				let contact=document.getElementById("feedback_admin");
+	        	
+	        	contact.style.display="none";
+	        	
+	        	
+	        }
+	        function display_feedback()
+	        {
+				let contact=document.getElementById("feedback_admin");
+	        	
+	        	contact.style.display="block";
+	        	  hidden_profile();
+	       	   hid_contactPage();
+	        	
+	        }
+	        function handleClick() {
+	        	   hidden_profile();
+	        	   hid_contactPage();
+	        	   hid_feedback();
+	        	}
+
+
         
     </script>
 		

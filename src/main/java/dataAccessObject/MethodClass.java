@@ -25,6 +25,8 @@ import javax.mail.internet.MimeMessage;
 import javax.sql.rowset.serial.SerialBlob;
 
 import dataTransferObject.AddToCart;
+import dataTransferObject.ContactAdmin;
+import dataTransferObject.Feedback;
 import dataTransferObject.PlacedOrders;
 import dataTransferObject.Products;
 import dataTransferObject.UserDetails;
@@ -583,5 +585,132 @@ public class MethodClass
 		 
 	 }
 	     
+	public  int inertFeedBack(Feedback feed) throws ClassNotFoundException, SQLException
+	{
+		Connection conn=getConnection();
+		
+		PreparedStatement pstmt=conn.prepareStatement("insert into feedback_table (userName,userMail,feedback,feedback_userId) value(?,?,?,?)");
+		
+		pstmt.setString(1, feed.getUserName());
+		pstmt.setString(2, feed.getUserMail());
+		pstmt.setString(3, feed.getFeedback());
+		pstmt.setLong(4, feed.getFeed_id());
+		
+		return pstmt.executeUpdate();
+		
+	}
+	
+	public int insertContact(ContactAdmin contact) throws ClassNotFoundException, SQLException
+	{
+		Connection conn=getConnection();
+		
+		PreparedStatement pstmt=conn.prepareStatement("insert into contact_table(userName,userMail,Message,contact_userId)value(?,?,?,?)");
+		
+		pstmt.setString(1, contact.getUserName());
+		pstmt.setString(2,contact.getEmail());
+		pstmt.setString(3, contact.getMessage());
+		pstmt.setLong(4, contact.getContact_userId());
+		
+		return pstmt.executeUpdate();
+	}
+	
+	public List<Feedback> listofFeedBack() throws ClassNotFoundException, SQLException
+	{
+		Connection conn=getConnection();
+		
+		PreparedStatement pstmt=conn.prepareStatement("select * from feedback_table");
+		
+		ResultSet rst=pstmt.executeQuery();
+		
+		List<Feedback> list=new ArrayList<>();
+		
+		while(rst.next())
+		{
+			
+			Feedback userFeedback=new Feedback();
+			
+			userFeedback.setFeed_id(rst.getInt(1));
+			userFeedback.setUserName(rst.getString(2));
+			userFeedback.setUserMail(rst.getString(3));
+			userFeedback.setFeedback(rst.getString(4));
+			userFeedback.setFeed_id(rst.getLong(5));
+			list.add(userFeedback);
+		}
+	
+		return list;
+		
+	}
+	public List<ContactAdmin> contactAdmin() throws ClassNotFoundException, SQLException
+	{
+		Connection conn=getConnection();
+		
+		PreparedStatement pstmt=conn.prepareStatement("select * from contact_table");
+		
+		ResultSet rst=pstmt.executeQuery();
+		
+		List<ContactAdmin> list=new ArrayList<>();
+		
+		while(rst.next())
+		{
+			
+			ContactAdmin userMessage=new ContactAdmin();
+			
+			userMessage.setContact_id(rst.getInt(1));
+			userMessage.setUserName(rst.getString(2));
+			userMessage.setEmail(rst.getString(3));
+			userMessage.setMessage(rst.getString(4));
+			userMessage.setContact_userId(rst.getLong(5));
+			list.add(userMessage);
+			
+		}
+	
+		return list;
+		
+	}
+	
+	public  void replyMail (String toMail,String subject,String reply) throws AddressException, MessagingException, IOException
+	{
+		
+		final String To=toMail;
+	
+		
+		
+		
+		FileInputStream file=new FileInputStream("D:\\J2EE\\pizzaproject\\src\\main\\java\\dataAccessObject\\Security");
+		
+		
+		Properties properties= new Properties();
+		
+		properties.load(file);
+		
+		final String from=properties.getProperty("user");
+		final String password=properties.getProperty("password");
+		
+		properties.put("mail.smtp.host", "smtp.gmail.com");
+		properties.put("mail.smtp.port","587");
+		properties.put("mail.smtp.auth", "true");
+		properties.put("mail.smtp.starttls.enable", "true");
+		
+		Session session=Session.getDefaultInstance(properties, new Authenticator() {
+			
+			@Override
+			protected PasswordAuthentication getPasswordAuthentication()
+			{
+				return new PasswordAuthentication(from, password);
+			}
+		});
+		
+		Message message=new MimeMessage(session);
+		
+		message.setFrom(new InternetAddress(from));
+		message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(To));
+		message.setSubject(subject);
+		message.setText(reply);
+		
+		Transport.send(message);
+		
+		
+		
+	}
 
 }

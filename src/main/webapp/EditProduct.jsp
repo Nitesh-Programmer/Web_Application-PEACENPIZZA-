@@ -8,6 +8,15 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+
+ <link rel="stylesheet" href="./CSS/AddProduct.css">
+ <style type="text/css">
+ 	#outercontainer{
+ 		
+ 			height: fit-content; 
+ 	}
+ </style>
+ 
 </head>
 <body>
 	<%

@@ -33,6 +33,11 @@ transition:3s;
 
 }
 
+#details{
+	height:fit-content;
+}
+
+
 </style>
 
 </head>
@@ -48,8 +53,9 @@ transition:3s;
         <a class="innerdivision" href="AddProduct.jsp">AddProduct</a>
         <a class="innerdivision" href="ListOfProduct.jsp">List of Products</a>
         <a class="innerdivision" href="Admin_UsersInfo.jsp">User's Informations</a>
-        <a class="innerdivision" href="#">Total Sales</a>
-        <a class="innerdivision" href="#">Additional Informations</a>
+        <a class="innerdivision" href="#" >Total Sales</a>
+        <a class="innerdivision" href="Feedback.jsp">FeedBack</a>
+        <a class="innerdivision" href="ContactUs.jsp">Contact Us</a>
         
 
    </div>

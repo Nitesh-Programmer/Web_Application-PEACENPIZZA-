@@ -21,14 +21,14 @@ body{
 
 #details{
     
-    height: 400px;
+    height: fit-content;
     width: 450px;
     text-align: center;
     text-decoration: none;
     border: 2px solid #032555;
     border-radius: 10px;
     margin-top: 100px;
-    margin-left: 350px;
+    margin-left: 380px;
     background-color: #fff;
     display: grid;
 

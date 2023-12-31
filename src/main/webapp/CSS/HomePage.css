@@ -9,6 +9,7 @@
     margin: 0%;
     width: 100%;
     padding: 0%;
+    
 }
 
 #container{
@@ -90,11 +91,12 @@
 #product_container {
     display: grid;
     grid-template-columns: repeat(3, minmax(300px, 1fr));
-    justify-content: space-between;
+    justify-content: space-around;
     left: 5px;
     position: relative;
     margin-top: 50px;
-    max-width: 1000px; 
+  	gap: 10px;
+  	background-color: #f7f7f7;
 }
 
 
@@ -113,6 +115,7 @@
     border: 1px solid black;
     padding: 20px;
     line-height: 20px;
+    width: min-content;
  
 }
 

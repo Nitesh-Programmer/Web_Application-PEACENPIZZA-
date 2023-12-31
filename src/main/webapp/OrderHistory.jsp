@@ -27,7 +27,7 @@
         #view{
          position:absolute;
 		top: 20%;
-		left: 10%;
+		left: 10%; 	
 		border-collapse: collapse;
 		border-spacing: 4px;
 		padding:10px 45px;
